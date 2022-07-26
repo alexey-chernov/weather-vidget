@@ -2,12 +2,12 @@
 
 const weatherBlock = document.querySelector('#weather');
 
-async function loadWeather(e) {
+async function loadWeather(tnam, e) {
     weatherBlock.innerHTML = `
         <div class="weather__loading">
             <img src="img/loading.gif" alt="Loading..." >
         </div>`;
-    const server = 'https://api.openweathermap.org/data/2.5/weather?q=Otwock,PL&appid=5ebc3876f8c9d8230f18c85ac440361d';
+    const server = `https://api.openweathermap.org/data/2.5/weather?q=${tnam}&appid=5ebc3876f8c9d8230f18c85ac440361d`;
     const response = await fetch(server, {
         method: 'GET',
     });
@@ -16,7 +16,7 @@ async function loadWeather(e) {
     if (response.ok) {
         getWeather(responseResult)
     } else {
-        weatherBlock.innerHTML = responseResult.message; 
+        weatherBlock.innerHTML = responseResult.message;
     }
 }
 
@@ -45,5 +45,5 @@ function getWeather(data) {
 }
 
 if (weatherBlock) {
-    loadWeather();
+    loadWeather("Warsaw");
 }
